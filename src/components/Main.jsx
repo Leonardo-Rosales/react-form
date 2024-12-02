@@ -28,6 +28,10 @@ export default function Main() {
         setTitle('')
     }
 
+    function deletePost(title) {
+        setPosts(posts.filter(post => post !== title))
+    }
+
 
     const initialPostId = initialPosts.map(post => post.id)
     const newTitles = posts.filter(post => !initialPostId.includes(post.id))
@@ -61,9 +65,13 @@ export default function Main() {
                             <input type="submit" value="Add" />
                         </form>
 
-                        <ul>
+                        <ul className='list-title'>
                             {newTitles.map((post) => (
-                                <li key={post.id}>{post.title}</li>
+                                <li className='titles' key={post.id}>
+                                    <span>{post.title}</span>
+                                    <span onClick={() => deletePost(post)} className='cross'>&#x2718;</span>
+                                </li>
+
                             ))}
                         </ul>
                     </div>
